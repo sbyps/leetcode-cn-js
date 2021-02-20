@@ -9,15 +9,18 @@
 
 var maxSlidingWindow = function(nums, k) {
   let queue = [], res = []
-  for (let i=0; i<nums.lengthl; i++) {
-    if (i-queue[0] >= k) queue.shift() // 超过3就要删除队列首部
-    // 小于当前则删除队列尾部，始终保持单调队列
-    while (nums[queue[queue.length-1]] <= nums[i]) {
-      queue.pop()
+  for (let i=0; i<nums.length; i++) {
+    if(queue.length) {
+      if (i-queue[0] >= k) queue.shift() // 超过3就要删除队列首部
+      // 小于当前则删除队列尾部，始终保持单调队列
+      while (nums[queue[queue.length-1]] <= nums[i]) {
+        queue.pop()
+      }
     }
+    
     queue.push(i)
     // k=3，所以 i 至少要等于 2，才能保证满足一个窗口范围
-    if (i>=k-1) res.push(nums[queue[0]])
+    if (i>=k-1 && queue.length) res.push(nums[queue[0]])
   }
   return res
 };
