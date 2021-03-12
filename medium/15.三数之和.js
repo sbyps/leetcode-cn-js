@@ -22,7 +22,7 @@ var threeSum = function(nums) {
       if (target < cur) {
         end--
       } else if (target > cur) {
-        start--
+        start++
       } else {
         res.push([nums[i], nums[start], nums[end]])
         // 继续过滤重复
@@ -35,3 +35,5 @@ var threeSum = function(nums) {
   }
   return res
 }
+
+console.log(threeSum([-1, 0, 1, 2, -1, -4]))
